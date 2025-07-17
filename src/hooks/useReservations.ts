@@ -221,14 +221,36 @@ export function useReservations() {
     if (!query.trim()) return reservations;
     
     const searchTerm = query.toLowerCase();
-    return reservations.filter(reservation => 
-      reservation.name.toLowerCase().includes(searchTerm) ||
-      reservation.surname.toLowerCase().includes(searchTerm) ||
-      reservation.phone.includes(searchTerm) ||
-      reservation.hall.toLowerCase().includes(searchTerm) ||
-      reservation.menu.toLowerCase().includes(searchTerm) ||
-      reservation.date.includes(searchTerm)
-    );
+    return reservations.filter(reservation => {
+      // Format date for better searching (e.g., "January 25, 2025", "Jan 2025", etc.)
+      const reservationDate = new Date(reservation.date);
+      const formattedDate = reservationDate.toLocaleDateString('en-US', { 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric' 
+      }).toLowerCase();
+      const shortDate = reservationDate.toLocaleDateString('en-US', { 
+        year: 'numeric', 
+        month: 'short', 
+        day: 'numeric' 
+      }).toLowerCase();
+      const yearMonth = reservationDate.toLocaleDateString('en-US', { 
+        year: 'numeric', 
+        month: 'long' 
+      }).toLowerCase();
+      
+      return (
+        reservation.name.toLowerCase().includes(searchTerm) ||
+        reservation.surname.toLowerCase().includes(searchTerm) ||
+        reservation.phone.includes(searchTerm) ||
+        reservation.hall.toLowerCase().includes(searchTerm) ||
+        reservation.menu.toLowerCase().includes(searchTerm) ||
+        reservation.date.includes(searchTerm) ||
+        formattedDate.includes(searchTerm) ||
+        shortDate.includes(searchTerm) ||
+        yearMonth.includes(searchTerm)
+      );
+    });
   };
 
   return {
