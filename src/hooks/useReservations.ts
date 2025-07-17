@@ -29,6 +29,7 @@ const initialReservations: Reservation[] = [
     menu: 'Premium Menu',
     deposit: 500,
     hall: 'Hall A',
+    numberOfPeople: 8,
     createdAt: new Date('2024-12-10'),
   },
   {
@@ -42,6 +43,7 @@ const initialReservations: Reservation[] = [
     menu: 'Wedding Package',
     deposit: 1200,
     hall: 'Garden',
+    numberOfPeople: 150,
     createdAt: new Date('2024-12-12'),
   },
   {
@@ -55,6 +57,7 @@ const initialReservations: Reservation[] = [
     menu: 'Custom Menu',
     deposit: 800,
     hall: 'Hall B',
+    numberOfPeople: 25,
     createdAt: new Date('2024-12-08'),
   }
 ];

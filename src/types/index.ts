@@ -16,6 +16,7 @@ export interface Reservation {
   menu: string;
   deposit: number;
   hall: string;
+  numberOfPeople: number;
   createdAt: Date;
   userId?: string;
 }

@@ -38,6 +38,7 @@ export interface ReservationFormData {
   menu: string;
   deposit: number;
   hall: string;
+  numberOfPeople: number;
 }
 
 const HALLS = ['Hall A', 'Hall B', 'Hall C', 'Private Room', 'Garden', 'Rooftop'];
@@ -59,6 +60,7 @@ export function ReservationForm({
     menu: reservation?.menu || '',
     deposit: reservation?.deposit || 0,
     hall: reservation?.hall || '',
+    numberOfPeople: reservation?.numberOfPeople || 1,
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -78,6 +80,7 @@ export function ReservationForm({
         menu: '',
         deposit: 0,
         hall: '',
+        numberOfPeople: 1,
       });
     }
   };
@@ -204,6 +207,20 @@ export function ReservationForm({
                   ))}
                 </SelectContent>
               </Select>
+            </div>
+
+            {/* Number of People */}
+            <div className="space-y-2">
+              <Label htmlFor="numberOfPeople">Number of People</Label>
+              <Input
+                id="numberOfPeople"
+                type="number"
+                min="1"
+                value={formData.numberOfPeople}
+                onChange={(e) => updateField('numberOfPeople', parseInt(e.target.value) || 1)}
+                placeholder="1"
+                className="bg-background/50"
+              />
             </div>
 
             {/* Deposit */}
